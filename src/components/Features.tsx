@@ -1,5 +1,5 @@
 import React from 'react'
-import { Star, Heart, Calendar, Hash, Moon, Brain, Zap, ArrowRight } from 'lucide-react'
+import { Star, Heart, Calendar, Hash, Moon, Brain, Zap, ArrowRight, Sparkles } from 'lucide-react'
 
 const Features: React.FC = () => {
   const handleFeatureClick = (featureTitle: string) => {
@@ -137,27 +137,6 @@ const Features: React.FC = () => {
               </div>
             )
           })}
-        </div>
-
-        {/* Premium bottom CTA */}
-        <div className="text-center mt-20">
-          <div className="max-w-2xl mx-auto">
-            <p className="text-starlight-300 mb-8 text-lg">
-              Hangi özelliği denemek isterseniz isteyin, hepsi tek tıkla hazır ve ücretsiz!
-            </p>
-            <button 
-              onClick={() => handleFeatureClick('Genel Bilgi')}
-              className="group bg-gradient-to-r from-cosmic-600 via-mystical-600 to-cosmic-700 hover:from-cosmic-500 hover:via-mystical-500 hover:to-cosmic-600 text-white px-12 py-4 rounded-3xl text-xl font-bold transition-all duration-500 hover:scale-105 shadow-2xl shadow-cosmic-500/30 hover:shadow-cosmic-400/50 flex items-center space-x-3 mx-auto border border-white/10 overflow-hidden relative"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-              
-              <div className="relative flex items-center space-x-3">
-                <Star className="w-6 h-6 group-hover:animate-spin" />
-                <span>Tüm Özellikleri Dene</span>
-                <Zap className="w-6 h-6 group-hover:animate-pulse text-yellow-300" />
-              </div>
-            </button>
-          </div>
         </div>
       </div>
     </section>

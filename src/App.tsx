@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Header from './layout/Header'
+import Footer from './layout/Footer'
 import Hero from './components/Hero'
 import Features from './components/Features'
 import Stats from './components/Stats'
@@ -28,6 +29,7 @@ function App() {
         <Stats />
         <Testimonials />
       </main>
+      <Footer />
     </div>
   )
 }
