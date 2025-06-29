@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Astrobot - Kişisel Astroloji Rehberin | Knowhy</title>
+    <meta name="description" content="Doğum haritanızı analiz edin, gizli kişilik yönlerinizi ve potansiyelinizi keşfedin. 3000+ günlük aktif kullanıcı, %94 doğruluk oranı ile kişisel astroloji rehberiniz." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Knowhy Bot Embed -->
+    <script src="https://astrobot2.knowhy.support/embed/knowhy-bot.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    
+    <knowhy-bot
+        buton_arkaplan_rengi="#800080"
+        buton_konum="sag"
+        buton_sag_bosluk="20"
+        buton_sol_bosluk="40" 
+        buton_alt_bosluk="20"
+        buton_boyut="85"
+        buton_surumle_birak="true"
+        buton_ikon_rengi="white"
+        buton_ikon_src="https://www.knowhy.social/wp-content/uploads/2025/05/crystal-ball.gif"
+        buton_ikon_boyut="85"
+        pencere_otomatik_ac="false"
+        pencere_otomatik_ac_gecikme="1"
+        pencere_otomatik_ac_mobil="false"
+        tooltip_goster="true"
+        tooltip_mesaj="Merhaba! Fal veya burç yorumu için buradayım!"
+        tooltip_arkaplan="#004080"
+        tooltip_yazi_rengi="#FFFFFF"
+        tooltip_yazi_boyutu="16"
+        pencere_baslik_goster="true"
+        pencere_baslik="ASTRO"
+        pencere_baslik_avatar="https://www.knowhy.social/wp-content/uploads/2025/05/crystal-ball.gif"
+        pencere_baslik_avatar_boyut="32"
+        pencere_agent_mesaj_goster="true"
+        pencere_hosgeldin="Merhaba, ben Astro! Yıldızların rehberliğinde burç yorumları, tarot falı, kahve falı ve daha fazlasıyla buradayım. Sana nasıl yardımcı olabilirim?"
+        pencere_hata="Maalesef ne demek istediğinizi anlamadım."
+        pencere_bekliyor_mesaji="Lütfen bekleyin, şu anda cevap veriyorum..."
+        pencere_rate_limit_mesaji="Çok fazla mesaj gönderdiniz. Lütfen bir süre bekleyip tekrar deneyin."
+        pencere_ag_hatasi_mesaji="Sunucuya bağlanılamadı. Lütfen internet bağlantınızı kontrol edin ve tekrar deneyin."
+        pencere_arkaplan="#E6E6FA"
+        pencere_yukseklik="620"
+        pencere_genislik="460"
+        pencere_yazi_boyutu="16"
+        pencere_baslangic_istekleri='["Selam!", "Günlük burç yorumları?","El Falı","Doğum Haritası"]'
+        pencere_baslangic_istek_yazi_boyutu="15"
+        pencere_yenilede_temizle="true"
+        bot_mesaj_arkaplan="#f7f8ff"
+        bot_mesaj_yazi_rengi="#303235"
+        bot_mesaj_avatar_goster="true"
+        bot_mesaj_avatar="https://www.knowhy.social/wp-content/uploads/2025/05/crystal-ball.gif"
+        bot_mesaj_avatar_boyut="40"
+        kullanici_mesaj_arkaplan="#C0A0C8"
+        kullanici_mesaj_yazi_rengi="#ffffff"
+        kullanici_mesaj_avatar_goster="true"
+        kullanici_mesaj_avatar="https://www.knowhy.social/wp-content/uploads/2025/05/profile.gif"
+        kullanici_mesaj_avatar_boyut="40"
+        arama_vurgu_arkaplan_rengi="#FFE0B2"
+        arama_vurgu_yazi_rengi="#BF360C"
+        arama_vurgu_yazi_kalinligi="600"
+        input_placeholder="Sorunuzu yazın"
+        input_arkaplan="#FFFFFF"
+        input_yazi_rengi="#333333"
+        input_gonder_buton_rengi="#800080"
+        input_max_karakter="500"
+        input_max_karakter_uyari="Karakter sınırını aştınız. Lütfen 500 karakterden az girin."
+        input_otomatik_fokus="true"
+        input_gonder_ses="true"
+        input_cevap_ses="true"
+        feedback_rengi="#1e1e1e"
+        feedback_goster="true"
+        footer_yazi_rengi="#333333"
+        footer_yazi="Geliştiren"
+        footer_sirket="Knowhy"
+        footer_sirket_link="https://knowhy.co"
+    ></knowhy-bot>
+
+    <script>
+      // Chatbot'u açmak için global fonksiyon
+      window.openKnowhyBot = function() {
+        // Farklı yöntemlerle chatbot'u açmaya çalış
+        const knowhyBot = document.querySelector('knowhy-bot');
+        if (knowhyBot) {
+          // Eğer chatbot element'i varsa tıkla
+          knowhyBot.click();
+          
+          // Shadow DOM içindeki butonu bul ve tıkla
+          setTimeout(() => {
+            const shadowRoot = knowhyBot.shadowRoot;
+            if (shadowRoot) {
+              const button = shadowRoot.querySelector('button') || shadowRoot.querySelector('[role="button"]');
+              if (button) {
+                button.click();
+              }
+            }
+          }, 100);
+        }
+        
+        // Alternatif yöntem - tüm butonları kontrol et
+        setTimeout(() => {
+          const allButtons = document.querySelectorAll('*');
+          allButtons.forEach(btn => {
+            if (btn.style && (btn.style.position === 'fixed' || btn.style.position === 'absolute')) {
+              if (btn.style.backgroundColor && btn.style.backgroundColor.includes('rgb(128, 0, 128)')) {
+                btn.click();
+              }
+            }
+          });
+        }, 200);
+      }
+    </script>
+  </body>
+</html> 
