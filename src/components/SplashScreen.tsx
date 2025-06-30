@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Star, Sparkles, Zap } from 'lucide-react'
+import { Star } from 'lucide-react'
 
 interface SplashScreenProps {
   onComplete: () => void

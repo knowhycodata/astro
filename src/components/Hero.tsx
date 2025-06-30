@@ -1,5 +1,5 @@
 import React from 'react'
-import { Star, Sparkles, Gem, Zap, MessageCircle, TrendingUp, Users, Award } from 'lucide-react'
+import { Star, Sparkles, TrendingUp, Users, Award } from 'lucide-react'
 import { useAnimatedCounter } from '../hooks/useAnimatedCounter'
 
 interface HeroStatCardProps {
@@ -84,24 +84,6 @@ const CosmicEnergyCircle: React.FC<CosmicEnergyCircleProps> = ({
 }
 
 const Hero: React.FC = () => {
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
-
-  const openChatbot = () => {
-    if ((window as any).openKnowhyBot) {
-      (window as any).openKnowhyBot();
-    } else {
-      const chatButton = document.querySelector('knowhy-bot') as any;
-      if (chatButton) {
-        chatButton.click();
-      }
-    }
-  }
-
   const heroStats = [
     {
       icon: Award,

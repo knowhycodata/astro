@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Star, Moon, Sun, Heart, Menu, X, Sparkles, Zap, ArrowRight } from 'lucide-react'
+import { Star, Moon, Heart, Menu, X, Sparkles } from 'lucide-react'
 
 const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)

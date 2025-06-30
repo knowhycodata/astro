@@ -1,8 +1,8 @@
 import React from 'react'
-import { Star, Heart, Calendar, Hash, Moon, Brain, Zap, ArrowRight, Sparkles } from 'lucide-react'
+import { Star, Heart, Calendar, Hash, Moon, Brain, Zap, ArrowRight } from 'lucide-react'
 
 const Features: React.FC = () => {
-  const handleFeatureClick = (featureTitle: string) => {
+  const handleFeatureClick = () => {
     // Chatbot'u açıp özellik hakkında soru sorma
     if ((window as any).openKnowhyBot) {
       (window as any).openKnowhyBot();
@@ -118,7 +118,7 @@ const Features: React.FC = () => {
 
                   {/* Premium CTA button */}
                   <button
-                    onClick={() => handleFeatureClick(feature.title)}
+                    onClick={handleFeatureClick}
                     className="group/btn w-full bg-black/30 backdrop-blur-sm border border-white/20 hover:border-cosmic-400/50 text-starlight-200 hover:text-white font-semibold py-4 px-6 rounded-2xl transition-all duration-300 hover:scale-105 flex items-center justify-center space-x-3 hover:bg-cosmic-400/10 relative overflow-hidden"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700"></div>

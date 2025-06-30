@@ -1,5 +1,5 @@
 import React from 'react'
-import { Star, Sparkles, Youtube, Instagram, Linkedin, Mail, Phone, MapPin, Hash } from 'lucide-react'
+import { Star, Sparkles, Youtube, Instagram, Linkedin } from 'lucide-react'
 
 const Footer: React.FC = () => {
   return (
