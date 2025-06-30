@@ -82,11 +82,74 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
             phase === 'astrobot' ? 'opacity-30 scale-90 -translate-y-16' :
             'opacity-0 scale-75 -translate-y-24'
           }`}>
-            <div className="mb-8">
-              <div className="text-6xl md:text-7xl font-light tracking-wider text-starlight-200 mb-2">
+            <div className="mb-8 relative">
+              {/* Glowing particles around KNOWHY */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                {Array.from({ length: 12 }).map((_, i) => (
+                  <div
+                    key={`knowhy-particle-${i}`}
+                    className={`absolute w-2 h-2 bg-gradient-to-r from-purple-400 to-violet-400 rounded-full transition-all duration-1000 ${
+                      phase === 'knowhy' ? 'opacity-100 animate-ping' : 'opacity-0'
+                    }`}
+                    style={{
+                      left: '50%',
+                      top: '50%',
+                      transform: `translate(-50%, -50%) rotate(${i * 30}deg) translateY(-80px)`,
+                      animationDelay: `${i * 0.1}s`,
+                      animationDuration: '2s',
+                      boxShadow: '0 0 10px rgba(147, 51, 234, 0.6)'
+                    }}
+                  />
+                ))}
+              </div>
+
+              {/* Main KNOWHY text with 3D neon effect */}
+              <div className={`text-7xl md:text-8xl lg:text-9xl font-black tracking-[0.2em] mb-4 transition-all duration-1500 ${
+                phase === 'knowhy' ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
+              }`} style={{
+                color: '#8b5cf6',
+                animation: phase === 'knowhy' ? 'pulse 3s ease-in-out infinite' : 'none',
+                textShadow: `
+                  0 0 5px rgba(139, 92, 246, 0.8),
+                  0 0 10px rgba(139, 92, 246, 0.4),
+                  0 0 15px rgba(139, 92, 246, 0.2)
+                `,
+                filter: 'drop-shadow(0 0 8px rgba(139, 92, 246, 0.3))',
+                fontWeight: '900',
+              }}>
                 K N O W H Y
               </div>
-              <div className="h-1 w-32 bg-gradient-to-r from-transparent via-cosmic-400 to-transparent mx-auto animate-shimmer"></div>
+
+              {/* Enhanced glowing underline */}
+              <div className="relative flex justify-center">
+                <div className={`h-2 w-48 bg-gradient-to-r from-transparent via-purple-400 to-transparent mx-auto transition-all duration-1000 ${
+                  phase === 'knowhy' ? 'animate-shimmer opacity-100 shadow-lg shadow-purple-400/50' : 'opacity-0'
+                }`} style={{
+                  boxShadow: '0 0 20px rgba(147, 51, 234, 0.6), 0 0 30px rgba(147, 51, 234, 0.3)',
+                  borderRadius: '4px'
+                }}></div>
+                
+                {/* Secondary shimmer line */}
+                <div className={`absolute top-4 h-1 w-32 bg-gradient-to-r from-transparent via-violet-300 to-transparent mx-auto transition-all duration-1000 ${
+                  phase === 'knowhy' ? 'animate-shimmer opacity-60' : 'opacity-0'
+                }`} style={{
+                  animationDelay: '0.5s',
+                  animationDuration: '3s',
+                  boxShadow: '0 0 15px rgba(139, 92, 246, 0.4)'
+                }}></div>
+              </div>
+
+              {/* Subtitle for KNOWHY */}
+              <div className={`text-lg md:text-xl font-medium text-purple-200/80 mt-6 transition-all duration-1000 ${
+                phase === 'knowhy' ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`} style={{ 
+                transitionDelay: '0.8s',
+                textShadow: '0 0 20px rgba(139, 92, 246, 0.3)'
+              }}>
+                <span className="bg-gradient-to-r from-purple-300 to-violet-300 bg-clip-text text-transparent animate-pulse">
+                  Merakınızın Gücünü Keşfedin
+                </span>
+              </div>
             </div>
           </div>
 

@@ -1,11 +1,88 @@
 import React from 'react'
 import { TrendingUp, Users, Star, Award, Shield, Clock, Target, Zap } from 'lucide-react'
+import { useAnimatedCounter } from '../hooks/useAnimatedCounter'
+
+interface AnimatedStatCardProps {
+  icon: React.ComponentType<any>
+  value: number
+  suffix?: string
+  prefix?: string
+  decimals?: number
+  label: string
+  description: string
+  color: string
+  gradient: string
+  glow: string
+  index: number
+}
+
+const AnimatedStatCard: React.FC<AnimatedStatCardProps> = ({
+  icon: IconComponent,
+  value,
+  suffix = '',
+  prefix = '',
+  decimals = 0,
+  label,
+  description,
+  gradient,
+  glow,
+  index
+}) => {
+  const { value: animatedValue, ref } = useAnimatedCounter({
+    end: value,
+    duration: 2000 + (index * 200), // Staggered animation
+    decimals,
+    suffix,
+    prefix,
+    startOnView: true
+  })
+
+  return (
+    <div
+      ref={ref}
+      className="group relative bg-black/20 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 text-center card-hover overflow-hidden"
+    >
+      {/* Background glow effect */}
+      <div className={`absolute inset-0 bg-gradient-to-br from-${glow}/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-3xl`}></div>
+      
+      {/* Icon */}
+      <div className="relative mb-6 flex justify-center">
+        <div className={`w-20 h-20 bg-gradient-to-br ${gradient} rounded-3xl flex items-center justify-center group-hover:scale-110 transition-all duration-500 shadow-2xl shadow-${glow}/20 group-hover:shadow-${glow}/40`}>
+          <IconComponent className="w-10 h-10 text-white" />
+        </div>
+        <div className={`absolute inset-0 w-20 h-20 bg-gradient-to-br ${gradient} rounded-3xl blur-xl opacity-0 group-hover:opacity-30 transition-all duration-500 top-0 left-1/2 transform -translate-x-1/2`}></div>
+      </div>
+      
+      {/* Animated Number */}
+      <div className="relative z-10 mb-2">
+        <span className="text-4xl md:text-5xl font-bold text-white block group-hover:scale-105 transition-transform duration-300">
+          {animatedValue}
+        </span>
+      </div>
+      
+      {/* Label */}
+      <h3 className="text-lg font-semibold text-starlight-200 mb-2 group-hover:text-white transition-colors duration-300">
+        {label}
+      </h3>
+      
+      {/* Description */}
+      <p className="text-starlight-400 text-sm leading-relaxed">
+        {description}
+      </p>
+
+      {/* Decorative elements */}
+      <div className="absolute top-4 right-4 w-2 h-2 bg-cosmic-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 animate-pulse"></div>
+      <div className="absolute bottom-4 left-4 w-1 h-1 bg-mystical-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 animate-pulse"></div>
+    </div>
+  )
+}
 
 const Stats: React.FC = () => {
   const stats = [
     {
       icon: Award,
-      number: '%94',
+      value: 94,
+      prefix: '%',
       label: 'Doğruluk Oranı',
       description: 'Profesyonel analiz kalitesi',
       color: 'text-yellow-400',
@@ -14,7 +91,8 @@ const Stats: React.FC = () => {
     },
     {
       icon: Users,
-      number: '3,000+',
+      value: 3000,
+      suffix: '+',
       label: 'Günlük Aktif Kullanıcı',
       description: 'Güven veren topluluk',
       color: 'text-cosmic-400',
@@ -23,7 +101,8 @@ const Stats: React.FC = () => {
     },
     {
       icon: TrendingUp,
-      number: '75,000+',
+      value: 75000,
+      suffix: '+',
       label: 'Astroloji Raporu',
       description: 'Kapsamlı analiz deneyimi',
       color: 'text-mystical-400',
@@ -32,7 +111,8 @@ const Stats: React.FC = () => {
     },
     {
       icon: Star,
-      number: '5.0',
+      value: 5.0,
+      decimals: 1,
       label: 'Memnuniyet Puanı',
       description: 'Yüksek kullanıcı memnuniyeti',
       color: 'text-green-400',
@@ -87,47 +167,22 @@ const Stats: React.FC = () => {
 
         {/* Main statistics */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16 max-w-7xl mx-auto">
-          {stats.map((stat, index) => {
-            const IconComponent = stat.icon
-            return (
-              <div
-                key={index}
-                className="group relative bg-black/20 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 text-center card-hover overflow-hidden"
-              >
-                {/* Background glow effect */}
-                <div className={`absolute inset-0 bg-gradient-to-br from-${stat.glow}/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-3xl`}></div>
-                
-                {/* Icon */}
-                <div className="relative mb-6 flex justify-center">
-                  <div className={`w-20 h-20 bg-gradient-to-br ${stat.gradient} rounded-3xl flex items-center justify-center group-hover:scale-110 transition-all duration-500 shadow-2xl shadow-${stat.glow}/20 group-hover:shadow-${stat.glow}/40`}>
-                    <IconComponent className="w-10 h-10 text-white" />
-                  </div>
-                  <div className={`absolute inset-0 w-20 h-20 bg-gradient-to-br ${stat.gradient} rounded-3xl blur-xl opacity-0 group-hover:opacity-30 transition-all duration-500 top-0 left-1/2 transform -translate-x-1/2`}></div>
-                </div>
-                
-                {/* Number */}
-                <div className="relative z-10 mb-2">
-                  <span className="text-4xl md:text-5xl font-bold text-white block group-hover:scale-105 transition-transform duration-300">
-                    {stat.number}
-                  </span>
-                </div>
-                
-                {/* Label */}
-                <h3 className="text-lg font-semibold text-starlight-200 mb-2 group-hover:text-white transition-colors duration-300">
-                  {stat.label}
-                </h3>
-                
-                {/* Description */}
-                <p className="text-starlight-400 text-sm leading-relaxed">
-                  {stat.description}
-                </p>
-
-                {/* Decorative elements */}
-                <div className="absolute top-4 right-4 w-2 h-2 bg-cosmic-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 animate-pulse"></div>
-                <div className="absolute bottom-4 left-4 w-1 h-1 bg-mystical-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 animate-pulse"></div>
-              </div>
-            )
-          })}
+          {stats.map((stat, index) => (
+            <AnimatedStatCard
+              key={index}
+              icon={stat.icon}
+              value={stat.value}
+              suffix={stat.suffix}
+              prefix={stat.prefix}
+              decimals={stat.decimals}
+              label={stat.label}
+              description={stat.description}
+              color={stat.color}
+              gradient={stat.gradient}
+              glow={stat.glow}
+              index={index}
+            />
+          ))}
         </div>
 
         {/* Additional features */}

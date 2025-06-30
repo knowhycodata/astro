@@ -1,5 +1,87 @@
 import React from 'react'
 import { Star, Sparkles, Gem, Zap, MessageCircle, TrendingUp, Users, Award } from 'lucide-react'
+import { useAnimatedCounter } from '../hooks/useAnimatedCounter'
+
+interface HeroStatCardProps {
+  icon: React.ComponentType<any>
+  value: number
+  suffix?: string
+  prefix?: string
+  label: string
+  gradient: string
+  shadowColor: string
+  index: number
+}
+
+const HeroStatCard: React.FC<HeroStatCardProps> = ({
+  icon: IconComponent,
+  value,
+  suffix = '',
+  prefix = '',
+  label,
+  gradient,
+  shadowColor,
+  index
+}) => {
+  const { value: animatedValue, ref } = useAnimatedCounter({
+    end: value,
+    duration: 1800 + (index * 150),
+    suffix,
+    prefix,
+    startOnView: true
+  })
+
+  return (
+    <div 
+      ref={ref}
+      className="bg-black/20 backdrop-blur-2xl border border-white/10 rounded-2xl p-6 hover:bg-black/30 transition-all duration-300 group"
+    >
+      <div className="flex items-center justify-center mb-3">
+        <div className={`w-12 h-12 bg-gradient-to-r ${gradient} rounded-2xl flex items-center justify-center shadow-2xl ${shadowColor}`}>
+          <IconComponent className="w-6 h-6 text-white" />
+        </div>
+      </div>
+      <div className="text-2xl font-bold text-white mb-1">{animatedValue}</div>
+      <div className="text-starlight-300 text-sm font-medium">{label}</div>
+    </div>
+  )
+}
+
+interface CosmicEnergyCircleProps {
+  value: number
+  label: string
+  gradient: string
+  borderColor: string
+  textColor: string
+  index: number
+}
+
+const CosmicEnergyCircle: React.FC<CosmicEnergyCircleProps> = ({
+  value,
+  label,
+  gradient,
+  borderColor,
+  textColor,
+  index
+}) => {
+  const { value: animatedValue, ref } = useAnimatedCounter({
+    end: value,
+    duration: 2200 + (index * 100),
+    suffix: '%',
+    startOnView: true
+  })
+
+  return (
+    <div ref={ref} className="text-center">
+      <div className={`w-16 h-16 mx-auto mb-2 bg-gradient-to-br ${gradient}/20 rounded-full flex items-center justify-center border ${borderColor}`}>
+        <div className={`w-10 h-10 bg-gradient-to-br ${gradient} rounded-full flex items-center justify-center`}>
+          <span className="text-white font-bold text-sm">{animatedValue}</span>
+        </div>
+      </div>
+      <p className={`${textColor} text-sm font-medium`}>{label}</p>
+    </div>
+  )
+}
 
 const Hero: React.FC = () => {
   const scrollToSection = (sectionId: string) => {
@@ -19,6 +101,57 @@ const Hero: React.FC = () => {
       }
     }
   }
+
+  const heroStats = [
+    {
+      icon: Award,
+      value: 94,
+      prefix: '%',
+      label: 'Doğruluk Oranı',
+      gradient: 'from-yellow-400 to-orange-500',
+      shadowColor: 'shadow-yellow-400/20'
+    },
+    {
+      icon: Users,
+      value: 3000,
+      suffix: '+',
+      label: 'Günlük Kullanıcı',
+      gradient: 'from-cosmic-400 to-mystical-500',
+      shadowColor: 'shadow-cosmic-400/20'
+    },
+    {
+      icon: TrendingUp,
+      value: 75000,
+      suffix: '+',
+      label: 'Analiz Raporu',
+      gradient: 'from-mystical-400 to-cosmic-600',
+      shadowColor: 'shadow-mystical-400/20'
+    }
+  ]
+
+  const cosmicEnergies = [
+    {
+      value: 87,
+      label: 'Sezgi',
+      gradient: 'from-cosmic-400 to-cosmic-600',
+      borderColor: 'border-cosmic-400/30',
+      textColor: 'text-cosmic-300'
+    },
+    {
+      value: 92,
+      label: 'Aşk',
+      gradient: 'from-mystical-400 to-mystical-600',
+      borderColor: 'border-mystical-400/30',
+      textColor: 'text-mystical-300'
+    },
+    {
+      value: 78,
+      label: 'Bereket',
+      gradient: 'from-yellow-400 to-orange-500',
+      borderColor: 'border-yellow-400/30',
+      textColor: 'text-yellow-300'
+    }
+  ]
 
   return (
     <section id="home" className="relative min-h-[80vh] flex items-center justify-center px-4 pt-20">
@@ -92,35 +225,19 @@ const Hero: React.FC = () => {
 
         {/* Premium Statistics */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 max-w-4xl mx-auto">
-          <div className="bg-black/20 backdrop-blur-2xl border border-white/10 rounded-2xl p-6 hover:bg-black/30 transition-all duration-300 group">
-            <div className="flex items-center justify-center mb-3">
-              <div className="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-2xl shadow-yellow-400/20">
-                <Award className="w-6 h-6 text-white" />
-              </div>
-            </div>
-            <div className="text-2xl font-bold text-white mb-1">%94</div>
-            <div className="text-starlight-300 text-sm font-medium">Doğruluk Oranı</div>
-          </div>
-
-          <div className="bg-black/20 backdrop-blur-2xl border border-white/10 rounded-2xl p-6 hover:bg-black/30 transition-all duration-300 group">
-            <div className="flex items-center justify-center mb-3">
-              <div className="w-12 h-12 bg-gradient-to-r from-cosmic-400 to-mystical-500 rounded-2xl flex items-center justify-center shadow-2xl shadow-cosmic-400/20">
-                <Users className="w-6 h-6 text-white" />
-              </div>
-            </div>
-            <div className="text-2xl font-bold text-white mb-1">3,000+</div>
-            <div className="text-starlight-300 text-sm font-medium">Günlük Kullanıcı</div>
-          </div>
-
-          <div className="bg-black/20 backdrop-blur-2xl border border-white/10 rounded-2xl p-6 hover:bg-black/30 transition-all duration-300 group">
-            <div className="flex items-center justify-center mb-3">
-              <div className="w-12 h-12 bg-gradient-to-r from-mystical-400 to-cosmic-600 rounded-2xl flex items-center justify-center shadow-2xl shadow-mystical-400/20">
-                <TrendingUp className="w-6 h-6 text-white" />
-              </div>
-            </div>
-            <div className="text-2xl font-bold text-white mb-1">75,000+</div>
-            <div className="text-starlight-300 text-sm font-medium">Analiz Raporu</div>
-          </div>
+          {heroStats.map((stat, index) => (
+            <HeroStatCard
+              key={index}
+              icon={stat.icon}
+              value={stat.value}
+              suffix={stat.suffix}
+              prefix={stat.prefix}
+              label={stat.label}
+              gradient={stat.gradient}
+              shadowColor={stat.shadowColor}
+              index={index}
+            />
+          ))}
         </div>
 
         {/* Mystical Cosmic Energy Widget */}
@@ -146,32 +263,17 @@ const Hero: React.FC = () => {
 
             {/* Energy Levels */}
             <div className="grid grid-cols-3 gap-4 mb-6">
-              <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-2 bg-gradient-to-br from-cosmic-500/20 to-cosmic-600/20 rounded-full flex items-center justify-center border border-cosmic-400/30">
-                  <div className="w-10 h-10 bg-gradient-to-br from-cosmic-400 to-cosmic-600 rounded-full flex items-center justify-center">
-                    <span className="text-white font-bold text-sm">87%</span>
-                  </div>
-                </div>
-                <p className="text-cosmic-300 text-sm font-medium">Sezgi</p>
-              </div>
-              
-              <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-2 bg-gradient-to-br from-mystical-500/20 to-mystical-600/20 rounded-full flex items-center justify-center border border-mystical-400/30">
-                  <div className="w-10 h-10 bg-gradient-to-br from-mystical-400 to-mystical-600 rounded-full flex items-center justify-center">
-                    <span className="text-white font-bold text-sm">92%</span>
-                  </div>
-                </div>
-                <p className="text-mystical-300 text-sm font-medium">Aşk</p>
-              </div>
-              
-              <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-2 bg-gradient-to-br from-yellow-500/20 to-orange-500/20 rounded-full flex items-center justify-center border border-yellow-400/30">
-                  <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
-                    <span className="text-white font-bold text-sm">78%</span>
-                  </div>
-                </div>
-                <p className="text-yellow-300 text-sm font-medium">Bereket</p>
-              </div>
+              {cosmicEnergies.map((energy, index) => (
+                <CosmicEnergyCircle
+                  key={index}
+                  value={energy.value}
+                  label={energy.label}
+                  gradient={energy.gradient}
+                  borderColor={energy.borderColor}
+                  textColor={energy.textColor}
+                  index={index}
+                />
+              ))}
             </div>
 
             {/* Mystical Quote */}

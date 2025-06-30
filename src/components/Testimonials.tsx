@@ -1,5 +1,42 @@
 import React from 'react'
 import { Star, Sparkles, Quote, Heart, ArrowRight } from 'lucide-react'
+import { useAnimatedCounter } from '../hooks/useAnimatedCounter'
+
+interface TrustIndicatorProps {
+  value: number
+  decimals?: number
+  suffix?: string
+  title: string
+  subtitle: string
+  textColor: string
+  index: number
+}
+
+const TrustIndicator: React.FC<TrustIndicatorProps> = ({
+  value,
+  decimals = 0,
+  suffix = '',
+  title,
+  subtitle,
+  textColor,
+  index
+}) => {
+  const { value: animatedValue, ref } = useAnimatedCounter({
+    end: value,
+    duration: 2000 + (index * 200),
+    decimals,
+    suffix,
+    startOnView: true
+  })
+
+  return (
+    <div ref={ref} className="text-center bg-black/10 backdrop-blur-xl border border-white/5 rounded-2xl p-6">
+      <div className={`text-3xl font-bold ${textColor} mb-2`}>{animatedValue}</div>
+      <div className="text-starlight-300 text-sm">{title}</div>
+      <div className="text-starlight-400 text-xs mt-1">{subtitle}</div>
+    </div>
+  )
+}
 
 const Testimonials: React.FC = () => {
   const handleStartJourney = () => {
@@ -67,6 +104,24 @@ const Testimonials: React.FC = () => {
       text: 'Günlük burç yorumlarım her sabah motivasyonumu artırıyor. Gün içinde karşılaşacağım durumlar için hazırlanabiliyorum. Çok pratik ve faydalı.',
       highlight: 'motivasyonumu artırıyor',
       category: 'Günlük Burç'
+    }
+  ]
+
+  const trustIndicators = [
+    {
+      value: 4.9,
+      decimals: 1,
+      suffix: '/5',
+      title: 'Ortalama Puan',
+      subtitle: '3000+ değerlendirme',
+      textColor: 'text-cosmic-400'
+    },
+    {
+      value: 98,
+      suffix: '%',
+      title: 'Tavsiye Oranı',
+      subtitle: 'Kullanıcılar tarafından',
+      textColor: 'text-mystical-400'
     }
   ]
 
@@ -149,16 +204,18 @@ const Testimonials: React.FC = () => {
 
         {/* Trust indicators */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 max-w-5xl mx-auto">
-          <div className="text-center bg-black/10 backdrop-blur-xl border border-white/5 rounded-2xl p-6">
-            <div className="text-3xl font-bold text-cosmic-400 mb-2">4.9/5</div>
-            <div className="text-starlight-300 text-sm">Ortalama Puan</div>
-            <div className="text-starlight-400 text-xs mt-1">3000+ değerlendirme</div>
-          </div>
-          <div className="text-center bg-black/10 backdrop-blur-xl border border-white/5 rounded-2xl p-6">
-            <div className="text-3xl font-bold text-mystical-400 mb-2">98%</div>
-            <div className="text-starlight-300 text-sm">Tavsiye Oranı</div>
-            <div className="text-starlight-400 text-xs mt-1">Kullanıcılar tarafından</div>
-          </div>
+          {trustIndicators.map((indicator, index) => (
+            <TrustIndicator
+              key={index}
+              value={indicator.value}
+              decimals={indicator.decimals}
+              suffix={indicator.suffix}
+              title={indicator.title}
+              subtitle={indicator.subtitle}
+              textColor={indicator.textColor}
+              index={index}
+            />
+          ))}
           <div className="text-center bg-black/10 backdrop-blur-xl border border-white/5 rounded-2xl p-6">
             <div className="text-3xl font-bold text-pink-400 mb-2">24/7</div>
             <div className="text-starlight-300 text-sm">Destek Hizmeti</div>
