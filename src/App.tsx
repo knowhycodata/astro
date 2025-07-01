@@ -20,7 +20,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-night-navy text-sand-beige relative overflow-x-hidden">
+    <div className="min-h-screen bg-slate-950 text-white relative overflow-x-hidden">
       <BackgroundAnimation />
       <Header />
       <main>

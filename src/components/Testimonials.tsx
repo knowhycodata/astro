@@ -1,5 +1,5 @@
 import React from 'react'
-import { Star, Heart } from 'lucide-react'
+import { Star, Heart, Users } from 'lucide-react'
 import { useAnimatedCounter } from '../hooks/useAnimatedCounter'
 
 interface TrustIndicatorProps {
@@ -9,6 +9,7 @@ interface TrustIndicatorProps {
   title: string
   subtitle: string
   index: number
+  gradient: string
 }
 
 const TrustIndicator: React.FC<TrustIndicatorProps> = ({
@@ -17,7 +18,8 @@ const TrustIndicator: React.FC<TrustIndicatorProps> = ({
   suffix = '',
   title,
   subtitle,
-  index
+  index,
+  gradient
 }) => {
   const { value: animatedValue, ref } = useAnimatedCounter({
     end: value,
@@ -28,10 +30,14 @@ const TrustIndicator: React.FC<TrustIndicatorProps> = ({
   })
 
   return (
-    <div ref={ref} className="text-center luxury-card p-6 bg-sand-beige/5 border border-silver-line/30">
-      <div className="font-serif-classic text-3xl font-bold text-honey-energy mb-2">{animatedValue}</div>
-      <div className="text-sand-beige text-sm">{title}</div>
-      <div className="text-sand-beige/60 text-xs mt-1">{subtitle}</div>
+    <div ref={ref} className="group text-center bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-white/20 transition-all duration-300">
+      <div className={`absolute inset-0 bg-gradient-to-br ${gradient}/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
+      
+      <div className="relative z-10">
+        <div className="text-3xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent mb-2">{animatedValue}</div>
+        <div className="text-white text-sm font-semibold">{title}</div>
+        <div className="text-white/60 text-xs mt-1">{subtitle}</div>
+      </div>
     </div>
   )
 }
@@ -56,7 +62,8 @@ const Testimonials: React.FC = () => {
       rating: 5,
       text: 'Astrobot sayesinde kendimi çok daha iyi tanıdım. Doğum haritası analizi gerçekten çok detaylı ve doğruydu.',
       highlight: 'çok daha iyi tanıdım',
-      category: 'Doğum Haritası'
+      category: 'Doğum Haritası',
+      gradient: 'from-amber-500 to-orange-500'
     },
     {
       name: 'Mehmet D.',
@@ -65,7 +72,8 @@ const Testimonials: React.FC = () => {
       rating: 5,
       text: 'AI falcı gerçekten çok başarılı! Tarot okumalarım her zaman doğru çıkıyor ve hayatıma yön veriyor.',
       highlight: 'her zaman doğru çıkıyor',
-      category: 'Tarot & AI'
+      category: 'Tarot & AI',
+      gradient: 'from-purple-500 to-indigo-500'
     },
     {
       name: 'Zeynep Ö.',
@@ -74,7 +82,8 @@ const Testimonials: React.FC = () => {
       rating: 5,
       text: 'Burç uyumluluğu özelliği sayesinde partnerimle aramızdaki dinamikleri çok daha iyi anlayabiliyoruz.',
       highlight: 'çok daha iyi anlayabiliyoruz',
-      category: 'İlişki Analizi'
+      category: 'İlişki Analizi',
+      gradient: 'from-pink-500 to-rose-500'
     },
     {
       name: 'Can Y.',
@@ -83,7 +92,8 @@ const Testimonials: React.FC = () => {
       rating: 5,
       text: 'Numeroloji analizim beni çok etkiledi. Yaşam yolu sayım ve kişilik özelliklerim birebir uyuşuyor.',
       highlight: 'birebir uyuşuyor',
-      category: 'Numeroloji'
+      category: 'Numeroloji',
+      gradient: 'from-emerald-500 to-teal-500'
     },
     {
       name: 'Ayşe Ç.',
@@ -92,7 +102,8 @@ const Testimonials: React.FC = () => {
       rating: 5,
       text: 'Rüya yorumları inanılmaz detaylı ve anlamlı. Bilinçaltımdan gelen mesajları anlamamda çok yardımcı oluyor.',
       highlight: 'inanılmaz detaylı ve anlamlı',
-      category: 'Rüya Yorumu'
+      category: 'Rüya Yorumu',
+      gradient: 'from-violet-500 to-purple-500'
     },
     {
       name: 'Emre K.',
@@ -101,7 +112,8 @@ const Testimonials: React.FC = () => {
       rating: 5,
       text: 'Günlük burç yorumlarım her sabah motivasyonumu artırıyor. Gün içinde karşılaşacağım durumlar için hazırlanabiliyorum.',
       highlight: 'motivasyonumu artırıyor',
-      category: 'Günlük Burç'
+      category: 'Günlük Burç',
+      gradient: 'from-red-500 to-orange-500'
     }
   ]
 
@@ -111,69 +123,92 @@ const Testimonials: React.FC = () => {
       decimals: 1,
       suffix: '/5',
       title: 'Ortalama Puan',
-      subtitle: '3000+ değerlendirme'
+      subtitle: '3000+ değerlendirme',
+      gradient: 'from-yellow-500 to-amber-500'
     },
     {
       value: 98,
       suffix: '%',
       title: 'Tavsiye Oranı',
-      subtitle: 'Kullanıcılar tarafından'
+      subtitle: 'Kullanıcılar tarafından',
+      gradient: 'from-green-500 to-emerald-500'
     }
   ]
 
   return (
-    <section id="testimonials" className="py-24 relative">
+    <section id="testimonials" className="py-32 relative">
       <div className="container mx-auto px-4">
-        {/* Lüks section başlığı */}
+        
+        {/* Section Header */}
         <div className="text-center mb-20">
-          <h2 className="font-serif-classic text-4xl md:text-6xl font-bold text-sand-beige mb-6 luxury-shadow">
-            Kullanıcı <span className="text-wine-purple">Deneyimleri</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full mb-6">
+            <Users className="w-4 h-4 text-purple-300" />
+            <span className="text-sm font-medium text-purple-200 tracking-wider uppercase">Kullanıcı Deneyimleri</span>
+          </div>
+          
+          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+            Gerçek
+            <br />
+            <span className="bg-gradient-to-r from-purple-300 via-pink-300 to-blue-300 bg-clip-text text-transparent">
+              Deneyimler
+            </span>
           </h2>
-          <p className="text-sand-beige/70 text-xl max-w-3xl mx-auto leading-relaxed">
-            Binlerce kullanıcımızın hayatlarını değiştiren deneyimlerini keşfedin.
+          
+          <p className="text-white/70 text-xl max-w-3xl mx-auto leading-relaxed font-light">
+            Binlerce kullanıcımızın hayatlarını değiştiren deneyimlerini keşfedin
           </p>
         </div>
 
-        {/* Lüks testimonials grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 max-w-6xl mx-auto">
+        {/* Testimonials Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 max-w-7xl mx-auto">
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="luxury-card p-8 bg-sand-beige/5 border border-silver-line/30 luxury-hover-shadow"
+              className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 hover:border-white/20 transition-all duration-500 hover:scale-105"
             >
-              {/* Category badge */}
-              <div className="inline-block bg-wine-purple/20 border border-wine-purple/30 text-wine-purple text-xs font-semibold px-3 py-1 mb-6">
-                {testimonial.category}
-              </div>
-
-              {/* Rating stars */}
-              <div className="flex space-x-1 mb-4">
-                {Array.from({ length: testimonial.rating }).map((_, i) => (
-                  <Star key={i} className="w-4 h-4 text-honey-energy fill-current" />
-                ))}
-              </div>
-
-              {/* Testimonial text */}
-              <div className="mb-6">
-                <p className="text-sand-beige/80 leading-relaxed text-base">
-                  "{testimonial.text.split(testimonial.highlight)[0]}
-                  <span className="text-wine-purple font-semibold bg-wine-purple/10 px-1 py-0.5">
-                    {testimonial.highlight}
-                  </span>
-                  {testimonial.text.split(testimonial.highlight)[1]}"
-                </p>
-              </div>
-
-              {/* User info */}
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-wine-purple to-wine-purple/80 flex items-center justify-center text-xl luxury-shadow">
-                  {testimonial.avatar}
+              {/* Gradient background effect */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${testimonial.gradient}/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
+              
+              {/* Content */}
+              <div className="relative z-10">
+                
+                {/* Category badge */}
+                <div className={`inline-block bg-gradient-to-r ${testimonial.gradient}/20 border border-white/20 text-white text-xs font-semibold px-3 py-1 rounded-full mb-6`}>
+                  {testimonial.category}
                 </div>
-                <div>
-                  <h4 className="text-sand-beige font-semibold text-lg">{testimonial.name}</h4>
-                  <p className="text-sand-beige/60 text-sm font-medium">{testimonial.sign}</p>
+
+                {/* Rating stars */}
+                <div className="flex space-x-1 mb-4">
+                  {Array.from({ length: testimonial.rating }).map((_, i) => (
+                    <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
+                  ))}
+                </div>
+
+                {/* Testimonial text */}
+                <div className="mb-6">
+                  <p className="text-white/80 leading-relaxed text-base">
+                    "{testimonial.text.split(testimonial.highlight)[0]}
+                    <span className="text-purple-300 font-semibold bg-purple-300/10 px-1 py-0.5 rounded">
+                      {testimonial.highlight}
+                    </span>
+                    {testimonial.text.split(testimonial.highlight)[1]}"
+                  </p>
+                </div>
+
+                {/* User info */}
+                <div className="flex items-center space-x-4">
+                  <div className={`w-12 h-12 bg-gradient-to-br ${testimonial.gradient} rounded-xl flex items-center justify-center text-xl shadow-lg`}>
+                    {testimonial.avatar}
+                  </div>
+                  <div>
+                    <h4 className="text-white font-semibold text-lg">{testimonial.name}</h4>
+                    <p className="text-white/60 text-sm font-medium">{testimonial.sign}</p>
+                  </div>
                 </div>
               </div>
+              
+              {/* Subtle glow effect */}
+              <div className={`absolute -inset-1 bg-gradient-to-r ${testimonial.gradient} rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500 -z-10`}></div>
             </div>
           ))}
         </div>
@@ -189,148 +224,33 @@ const Testimonials: React.FC = () => {
               title={indicator.title}
               subtitle={indicator.subtitle}
               index={index}
+              gradient={indicator.gradient}
             />
           ))}
-          <div className="text-center luxury-card p-6 bg-sand-beige/5 border border-silver-line/30">
-            <div className="font-serif-classic text-3xl font-bold text-honey-energy mb-2">24/7</div>
-            <div className="text-sand-beige text-sm">Destek Hizmeti</div>
-            <div className="text-sand-beige/60 text-xs mt-1">Her zaman yanınızda</div>
+          <div className="group text-center bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-white/20 transition-all duration-300">
+            <div className="text-3xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent mb-2">24/7</div>
+            <div className="text-white text-sm font-semibold">Destek Hizmeti</div>
+            <div className="text-white/60 text-xs mt-1">Her zaman yanınızda</div>
           </div>
         </div>
 
-        {/* Mistik Kozmik Enerji Göstergesi */}
-        <div className="text-center">
-          <div className="max-w-4xl mx-auto">
-            <div className="luxury-card p-16 bg-sand-beige/5 border border-silver-line/30 luxury-shadow-lg relative overflow-hidden">
-              
-              {/* Arka plan enerji dalgaları */}
-              <div className="absolute inset-0">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="absolute inset-0 rounded-full border border-wine-purple/20 animate-pulse"
-                    style={{
-                      animationDelay: `${i * 0.8}s`,
-                      animationDuration: '4s',
-                      transform: `scale(${0.2 + i * 0.2})`,
-                      opacity: 0.6 - i * 0.1
-                    }}
-                  />
-                ))}
-              </div>
-
-              {/* Merkez kozmik gösterge */}
-              <div className="relative z-10 mb-8">
-                <div className="flex justify-center mb-6">
-                  <div className="relative">
-                    {/* Ana enerji kristali */}
-                    <div className="w-20 h-20 bg-gradient-to-br from-honey-energy via-wine-purple to-honey-energy rounded-full animate-glow luxury-shadow-lg flex items-center justify-center">
-                      <div className="w-12 h-12 bg-gradient-to-br from-sand-beige/30 to-wine-purple/30 rounded-full animate-pulse-slow"></div>
-                    </div>
-                    
-                    {/* Çevresindeki enerji noktaları */}
-                    {Array.from({ length: 8 }).map((_, i) => (
-                      <div
-                        key={i}
-                        className="absolute w-3 h-3 bg-honey-energy rounded-full animate-twinkle"
-                        style={{
-                          top: '50%',
-                          left: '50%',
-                          transform: `
-                            translate(-50%, -50%) 
-                            rotate(${i * 45}deg) 
-                            translateY(-50px)
-                          `,
-                          animationDelay: `${i * 0.2}s`,
-                          boxShadow: '0 0 10px rgba(255, 204, 112, 0.8)'
-                        }}
-                      />
-                    ))}
-                  </div>
-                </div>
-                
-                <h3 className="font-serif-classic text-3xl md:text-4xl font-bold text-sand-beige mb-4">
-                  <span className="text-honey-energy">Kozmik Enerji</span> Akımı
-                </h3>
-                
-                <p className="text-sand-beige/70 mb-8 text-lg leading-relaxed max-w-2xl mx-auto">
-                  Şu anda evrensel enerji akımı güçlü. Yıldızlar sizin için uygun zamanı işaret ediyor.
-                </p>
-              </div>
-
-              {/* Enerji seviyeleri */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 relative z-10">
-                <div className="text-center">
-                  <div className="w-16 h-16 mx-auto mb-3 bg-wine-purple/20 rounded-full flex items-center justify-center luxury-shadow">
-                    <span className="text-2xl">🌟</span>
-                  </div>
-                  <div className="text-sm text-sand-beige font-semibold mb-1">Sezgi Gücü</div>
-                  <div className="w-full bg-night-navy/30 rounded-full h-2">
-                    <div className="bg-gradient-to-r from-honey-energy to-wine-purple h-2 rounded-full animate-pulse" style={{ width: '92%' }}></div>
-                  </div>
-                  <div className="text-xs text-honey-energy mt-1">%92</div>
-                </div>
-                
-                <div className="text-center">
-                  <div className="w-16 h-16 mx-auto mb-3 bg-wine-purple/20 rounded-full flex items-center justify-center luxury-shadow">
-                    <span className="text-2xl">🔮</span>
-                  </div>
-                  <div className="text-sm text-sand-beige font-semibold mb-1">Mistik Bağlantı</div>
-                  <div className="w-full bg-night-navy/30 rounded-full h-2">
-                    <div className="bg-gradient-to-r from-honey-energy to-wine-purple h-2 rounded-full animate-pulse" style={{ width: '88%' }}></div>
-                  </div>
-                  <div className="text-xs text-honey-energy mt-1">%88</div>
-                </div>
-                
-                <div className="text-center">
-                  <div className="w-16 h-16 mx-auto mb-3 bg-wine-purple/20 rounded-full flex items-center justify-center luxury-shadow">
-                    <span className="text-2xl">✨</span>
-                  </div>
-                  <div className="text-sm text-sand-beige font-semibold mb-1">Enerji Akışı</div>
-                  <div className="w-full bg-night-navy/30 rounded-full h-2">
-                    <div className="bg-gradient-to-r from-honey-energy to-wine-purple h-2 rounded-full animate-pulse" style={{ width: '95%' }}></div>
-                  </div>
-                  <div className="text-xs text-honey-energy mt-1">%95</div>
-                </div>
-                
-                <div className="text-center">
-                  <div className="w-16 h-16 mx-auto mb-3 bg-wine-purple/20 rounded-full flex items-center justify-center luxury-shadow">
-                    <span className="text-2xl">🌙</span>
-                  </div>
-                  <div className="text-sm text-sand-beige font-semibold mb-1">Astral Uyum</div>
-                  <div className="w-full bg-night-navy/30 rounded-full h-2">
-                    <div className="bg-gradient-to-r from-honey-energy to-wine-purple h-2 rounded-full animate-pulse" style={{ width: '90%' }}></div>
-                  </div>
-                  <div className="text-xs text-honey-energy mt-1">%90</div>
-                </div>
-              </div>
-
-              {/* Mistik mesaj */}
-              <div className="relative z-10">
-                <div className="bg-wine-purple/10 border border-wine-purple/30 p-6 mb-6 luxury-shadow">
-                  <div className="flex items-center justify-center space-x-3 mb-3">
-                    <span className="text-2xl animate-pulse">🌌</span>
-                    <span className="font-serif-classic text-lg font-bold text-honey-energy">Evrensel Mesaj</span>
-                    <span className="text-2xl animate-pulse">🌌</span>
-                  </div>
-                  <p className="text-sand-beige/80 text-center italic leading-relaxed">
-                    "Yıldızlar bugün senin için özel bir yolculuk hazırladı. İç sesin seni doğru yöne götürecek."
-                  </p>
-                </div>
-                
-                <button 
-                  onClick={handleStartJourney}
-                  className="bg-gradient-to-r from-honey-energy to-honey-energy/90 hover:from-honey-energy/90 hover:to-honey-energy text-night-navy px-12 py-4 text-xl font-bold transition-all duration-300 luxury-shadow-lg luxury-hover-shadow"
-                >
-                  <div className="flex items-center space-x-3">
-                    <span className="text-2xl animate-spin-slow">⭐</span>
-                    <span className="font-serif-classic">Enerji Akımına Katıl</span>
-                    <span className="text-2xl animate-spin-slow">⭐</span>
-                  </div>
-                </button>
-              </div>
-            </div>
-          </div>
+        {/* Final CTA */}
+        <div className="text-center bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-12 max-w-4xl mx-auto">
+          <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            Sen de Bu <span className="bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">Deneyimin</span> Parçası Ol
+          </h3>
+          
+          <p className="text-white/70 text-lg mb-8 max-w-2xl mx-auto">
+            Kişilik analizin ile yaşamındaki gizli potansiyelleri keşfet ve kozmik rehberliğin eşliğinde yoluna devam et.
+          </p>
+          
+          <button 
+            onClick={handleStartJourney}
+            className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-600 via-purple-700 to-indigo-700 hover:from-purple-500 hover:via-purple-600 hover:to-indigo-600 text-white px-8 py-4 text-lg font-semibold rounded-2xl shadow-2xl hover:shadow-purple-500/25 transition-all duration-500 hover:scale-105"
+          >
+            <Heart className="w-5 h-5" />
+            <span>Analizine Başla</span>
+          </button>
         </div>
       </div>
     </section>
