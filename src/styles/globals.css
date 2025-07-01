@@ -1,9 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
+    --night-navy: #0B0F2B;
+    --sand-beige: #F1E8DC;
+    --wine-purple: #5E2750;
+    --silver-line: #D8D8D8;
+    --honey-energy: #FFCC70;
+    
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
     --card: 240 10% 3.9%;
@@ -25,6 +32,235 @@
     --ring: 263 70% 50%;
     --radius: 0.5rem;
   }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    background-color: var(--night-navy);
+    color: var(--sand-beige);
+  }
+}
+
+@layer utilities {
+  /* Serif Font */
+  .font-serif-classic {
+    font-family: 'Marcellus', serif;
+  }
+
+  /* Luxury Card Styles */
+  .luxury-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .luxury-hover-shadow:hover {
+    box-shadow: 0 20px 40px rgba(94, 39, 80, 0.15), 
+                0 10px 20px rgba(94, 39, 80, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .luxury-shadow {
+    box-shadow: 0 8px 25px rgba(94, 39, 80, 0.15),
+                0 3px 10px rgba(94, 39, 80, 0.1);
+  }
+
+  .luxury-shadow-lg {
+    box-shadow: 0 20px 50px rgba(94, 39, 80, 0.2),
+                0 10px 25px rgba(94, 39, 80, 0.15),
+                0 5px 15px rgba(94, 39, 80, 0.1);
+  }
+
+  /* Color Classes */
+  .bg-night-navy {
+    background-color: var(--night-navy);
+  }
+
+  .bg-sand-beige {
+    background-color: var(--sand-beige);
+  }
+
+  .bg-wine-purple {
+    background-color: var(--wine-purple);
+  }
+
+  .bg-honey-energy {
+    background-color: var(--honey-energy);
+  }
+
+  .text-night-navy {
+    color: var(--night-navy);
+  }
+
+  .text-sand-beige {
+    color: var(--sand-beige);
+  }
+
+  .text-wine-purple {
+    color: var(--wine-purple);
+  }
+
+  .text-honey-energy {
+    color: var(--honey-energy);
+  }
+
+  .border-silver-line {
+    border-color: var(--silver-line);
+  }
+
+  /* Smooth Scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Card Hover Animation */
+  .card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-hover:hover {
+    transform: translateY(-5px);
+  }
+
+  /* Premium Button Animation */
+  .btn-premium {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .btn-premium::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .btn-premium:hover::before {
+    left: 100%;
+  }
+
+  /* Animated Gradient */
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 3s ease infinite;
+  }
+
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* Shimmer Effect */
+  .animate-shimmer {
+    background-size: 400% 100%;
+    animation: shimmer 2s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: 100% 0%;
+    }
+    100% {
+      background-position: -100% 0%;
+    }
+  }
+
+  /* Glow Animation */
+  .animate-glow {
+    animation: glow 3s ease-in-out infinite;
+  }
+
+  @keyframes glow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(255, 204, 112, 0.3),
+                  0 0 40px rgba(255, 204, 112, 0.2),
+                  0 0 60px rgba(255, 204, 112, 0.1);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(255, 204, 112, 0.4),
+                  0 0 60px rgba(255, 204, 112, 0.3),
+                  0 0 80px rgba(255, 204, 112, 0.2);
+    }
+  }
+
+  .animate-fadeInScale {
+    animation: fadeInScale 2s ease-out forwards;
+  }
+
+  @keyframes fadeInScale {
+    0% {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: .7;
+    }
+  }
+
+  .animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-spin {
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(-25%);
+      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+    50% {
+      transform: none;
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+  }
+
+  .animate-bounce {
+    animation: bounce 1s infinite;
+  }
 }
 
 * {
@@ -33,10 +269,45 @@
 
 body {
   color: hsl(var(--foreground));
-  background: hsl(var(--background));
+  background: #0B0F2B; /* Night Navy */
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   overflow-x: hidden;
   scroll-behavior: smooth;
+}
+
+/* Premium serif font için utility class */
+.font-serif-classic {
+  font-family: 'Marcellus', serif;
+}
+
+/* Lüks tema için shadow utility'leri */
+.luxury-shadow {
+  box-shadow: 0 4px 20px rgba(94, 39, 80, 0.15);
+}
+
+.luxury-shadow-lg {  
+  box-shadow: 0 8px 32px rgba(94, 39, 80, 0.2);
+}
+
+.luxury-hover-shadow {
+  transition: box-shadow 0.3s ease;
+}
+
+.luxury-hover-shadow:hover {
+  box-shadow: 0 8px 32px rgba(94, 39, 80, 0.25);
+}
+
+/* Keskin köşeli modern tasarım için utility */
+.luxury-card {
+  background: rgba(241, 232, 220, 0.05);
+  border: 1px solid rgba(216, 216, 216, 0.2);
+  transition: all 0.3s ease;
+}
+
+.luxury-card:hover {
+  background: rgba(241, 232, 220, 0.08);
+  border-color: rgba(216, 216, 216, 0.3);
+  box-shadow: 0 8px 32px rgba(94, 39, 80, 0.15);
 }
 
 /* Premium gradient backgrounds */
@@ -250,17 +521,6 @@ body {
   animation: fadeInScale 2s ease-out forwards;
 }
 
-/* Premium card hover effects */
-.card-hover {
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.card-hover:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 25px 50px rgba(139, 92, 246, 0.15),
-              0 12px 24px rgba(139, 92, 246, 0.1);
-}
-
 /* Premium button effects */
 .premium-button {
   position: relative;
@@ -300,11 +560,189 @@ body {
   filter: drop-shadow(0 4px 20px rgba(139, 92, 246, 0.4));
 }
 
+/* Mistik Hero Animasyonları */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05) translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0px);
+  }
+}
+
+@keyframes mysticalGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 204, 112, 0.4),
+                0 0 40px rgba(255, 204, 112, 0.2),
+                0 0 60px rgba(255, 204, 112, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 204, 112, 0.6),
+                0 0 60px rgba(255, 204, 112, 0.4),
+                0 0 90px rgba(255, 204, 112, 0.2);
+  }
+}
+
+@keyframes mirrorReflection {
+  0%, 100% {
+    background: linear-gradient(135deg, rgba(241, 232, 220, 0.2) 0%, transparent 30%, transparent 70%, rgba(241, 232, 220, 0.1) 100%);
+  }
+  50% {
+    background: linear-gradient(135deg, rgba(241, 232, 220, 0.3) 0%, transparent 25%, transparent 75%, rgba(241, 232, 220, 0.2) 100%);
+  }
+}
+
+@keyframes zodiacTransition {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) rotate(180deg);
+    filter: blur(10px);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1) rotate(90deg);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    filter: blur(0px);
+  }
+}
+
+@keyframes mysticalFloat {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-15px) translateX(5px) rotate(90deg);
+  }
+  50% {
+    transform: translateY(-10px) translateX(-8px) rotate(180deg);
+  }
+  75% {
+    transform: translateY(-20px) translateX(3px) rotate(270deg);
+  }
+}
+
+@keyframes energyPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+}
+
+@keyframes textSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+  }
+}
+
+@keyframes shimmerEffect {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+/* Premium utility classes */
+.animate-fadeInScale {
+  animation: fadeInScale 1.5s ease-out forwards;
+}
+
+.animate-mystical-glow {
+  animation: mysticalGlow 3s ease-in-out infinite;
+}
+
+.animate-mirror-reflection {
+  animation: mirrorReflection 4s ease-in-out infinite;
+}
+
+.animate-zodiac-transition {
+  animation: zodiacTransition 1s ease-out forwards;
+}
+
+.animate-mystical-float {
+  animation: mysticalFloat 8s ease-in-out infinite;
+}
+
+.animate-energy-pulse {
+  animation: energyPulse 2s ease-in-out infinite;
+}
+
+.animate-text-slide-in {
+  animation: textSlideIn 1.5s ease-out forwards;
+}
+
+.animate-shimmer-effect {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background-size: 200% 100%;
+  animation: shimmerEffect 3s infinite;
+}
+
+/* Mistik arka plan efektleri */
+.mystical-bg {
+  background: radial-gradient(circle at 20% 50%, rgba(94, 39, 80, 0.3) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(255, 204, 112, 0.2) 0%, transparent 50%),
+              radial-gradient(circle at 40% 80%, rgba(241, 232, 220, 0.1) 0%, transparent 50%);
+  animation: mysticalShift 15s ease-in-out infinite;
+}
+
+@keyframes mysticalShift {
+  0%, 100% {
+    background-position: 0% 0%, 100% 0%, 50% 100%;
+  }
+  50% {
+    background-position: 100% 100%, 0% 100%, 0% 0%;
+  }
+}
+
+/* Ayna yüzey efektleri */
+.mirror-surface {
+  background: linear-gradient(135deg, rgba(241, 232, 220, 0.1) 0%, transparent 50%, rgba(241, 232, 220, 0.05) 100%);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(216, 216, 216, 0.2);
+}
+
+.mirror-surface::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+  border-radius: inherit;
+  animation: mirrorReflection 6s ease-in-out infinite;
+}
+
 /* Responsive typography */
 @media (max-width: 640px) {
   .big-chatbot-button {
     padding: 1.5rem 2rem;
     font-size: 1.125rem;
+  }
+  
+  .mystical-text {
+    font-size: 1.5rem;
+    line-height: 1.4;
   }
 }
 

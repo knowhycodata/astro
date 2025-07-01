@@ -10,9 +10,6 @@ interface AnimatedStatCardProps {
   decimals?: number
   label: string
   description: string
-  color: string
-  gradient: string
-  glow: string
   index: number
 }
 
@@ -24,13 +21,11 @@ const AnimatedStatCard: React.FC<AnimatedStatCardProps> = ({
   decimals = 0,
   label,
   description,
-  gradient,
-  glow,
   index
 }) => {
   const { value: animatedValue, ref } = useAnimatedCounter({
     end: value,
-    duration: 2000 + (index * 200), // Staggered animation
+    duration: 2000 + (index * 200),
     decimals,
     suffix,
     prefix,
@@ -40,39 +35,31 @@ const AnimatedStatCard: React.FC<AnimatedStatCardProps> = ({
   return (
     <div
       ref={ref}
-      className="group relative bg-black/20 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 text-center card-hover overflow-hidden"
+      className="luxury-card p-8 text-center bg-sand-beige/5 border border-silver-line/30 luxury-hover-shadow"
     >
-      {/* Background glow effect */}
-      <div className={`absolute inset-0 bg-gradient-to-br from-${glow}/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-3xl`}></div>
-      
       {/* Icon */}
-      <div className="relative mb-6 flex justify-center">
-        <div className={`w-20 h-20 bg-gradient-to-br ${gradient} rounded-3xl flex items-center justify-center group-hover:scale-110 transition-all duration-500 shadow-2xl shadow-${glow}/20 group-hover:shadow-${glow}/40`}>
-          <IconComponent className="w-10 h-10 text-white" />
+      <div className="mb-6 flex justify-center">
+        <div className="w-16 h-16 bg-gradient-to-br from-wine-purple to-wine-purple/80 flex items-center justify-center luxury-shadow transition-all duration-300">
+          <IconComponent className="w-8 h-8 text-sand-beige" />
         </div>
-        <div className={`absolute inset-0 w-20 h-20 bg-gradient-to-br ${gradient} rounded-3xl blur-xl opacity-0 group-hover:opacity-30 transition-all duration-500 top-0 left-1/2 transform -translate-x-1/2`}></div>
       </div>
       
       {/* Animated Number */}
-      <div className="relative z-10 mb-2">
-        <span className="text-4xl md:text-5xl font-bold text-white block group-hover:scale-105 transition-transform duration-300">
+      <div className="mb-2">
+        <span className="font-serif-classic text-4xl md:text-5xl font-bold text-honey-energy block">
           {animatedValue}
         </span>
       </div>
       
       {/* Label */}
-      <h3 className="text-lg font-semibold text-starlight-200 mb-2 group-hover:text-white transition-colors duration-300">
+      <h3 className="text-lg font-semibold text-sand-beige mb-2">
         {label}
       </h3>
       
       {/* Description */}
-      <p className="text-starlight-400 text-sm leading-relaxed">
+      <p className="text-sand-beige/70 text-sm leading-relaxed">
         {description}
       </p>
-
-      {/* Decorative elements */}
-      <div className="absolute top-4 right-4 w-2 h-2 bg-cosmic-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 animate-pulse"></div>
-      <div className="absolute bottom-4 left-4 w-1 h-1 bg-mystical-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 animate-pulse"></div>
     </div>
   )
 }
@@ -84,40 +71,28 @@ const Stats: React.FC = () => {
       value: 94,
       prefix: '%',
       label: 'Doğruluk Oranı',
-      description: 'Profesyonel analiz kalitesi',
-      color: 'text-yellow-400',
-      gradient: 'from-yellow-400 to-orange-500',
-      glow: 'yellow-400'
+      description: 'Profesyonel analiz kalitesi'
     },
     {
       icon: Users,
       value: 3000,
       suffix: '+',
       label: 'Günlük Aktif Kullanıcı',
-      description: 'Güven veren topluluk',
-      color: 'text-cosmic-400',
-      gradient: 'from-cosmic-400 to-cosmic-600',
-      glow: 'cosmic-400'
+      description: 'Güven veren topluluk'
     },
     {
       icon: TrendingUp,
       value: 75000,
       suffix: '+',
       label: 'Astroloji Raporu',
-      description: 'Kapsamlı analiz deneyimi',
-      color: 'text-mystical-400',
-      gradient: 'from-mystical-400 to-mystical-600',
-      glow: 'mystical-400'
+      description: 'Kapsamlı analiz deneyimi'
     },
     {
       icon: Star,
       value: 5.0,
       decimals: 1,
       label: 'Memnuniyet Puanı',
-      description: 'Yüksek kullanıcı memnuniyeti',
-      color: 'text-green-400',
-      gradient: 'from-green-400 to-emerald-500',
-      glow: 'green-400'
+      description: 'Yüksek kullanıcı memnuniyeti'
     }
   ]
 
@@ -125,48 +100,40 @@ const Stats: React.FC = () => {
     {
       icon: Shield,
       title: 'Güvenli Platform',
-      description: 'Verileriniz 256-bit SSL ile korunur'
+      description: 'Verileriniz güvende'
     },
     {
       icon: Clock,
       title: '7/24 Erişim',
-      description: 'İstediğiniz zaman fal bakımı'
+      description: 'Her zaman ulaşılabilir'
     },
     {
       icon: Target,
       title: 'Kişisel Analiz',
-      description: 'Size özel yorumlar ve öneriler'
+      description: 'Size özel yorumlar'
     },
     {
       icon: Zap,
       title: 'Anında Sonuç',
-      description: 'Hızlı ve detaylı raporlama'
+      description: 'Hızlı raporlama'
     }
   ]
 
   return (
     <section id="stats" className="py-24 relative">
       <div className="container mx-auto px-4">
-        {/* Premium section header */}
+        {/* Lüks section başlığı */}
         <div className="text-center mb-20">
-          <div className="flex justify-center mb-6">
-            <div className="w-16 h-16 bg-gradient-to-br from-yellow-400/20 to-orange-500/20 rounded-3xl flex items-center justify-center backdrop-blur-sm border border-white/10 shadow-2xl shadow-yellow-400/10">
-              <Award className="w-8 h-8 text-yellow-400" />
-            </div>
-          </div>
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
-            <span className="bg-gradient-to-r from-yellow-400 via-orange-400 to-yellow-500 bg-clip-text text-transparent">
-              Güvenilir Platform
-            </span>
+          <h2 className="font-serif-classic text-4xl md:text-6xl font-bold text-sand-beige mb-6 luxury-shadow">
+            Güvenilir <span className="text-wine-purple">Platform</span>
           </h2>
-          <p className="text-starlight-300 text-xl max-w-3xl mx-auto leading-relaxed">
+          <p className="text-sand-beige/70 text-xl max-w-3xl mx-auto leading-relaxed">
             Binlerce kullanıcı Astrobot ile kozmik potansiyelini keşfetti ve hayatlarına yön verdi.
-            Profesyonel kalitemizle siz de bu güvenilir yolculuğa katılın.
           </p>
         </div>
 
-        {/* Main statistics */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16 max-w-7xl mx-auto">
+        {/* Ana istatistikler */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16 max-w-6xl mx-auto">
           {stats.map((stat, index) => (
             <AnimatedStatCard
               key={index}
@@ -177,30 +144,27 @@ const Stats: React.FC = () => {
               decimals={stat.decimals}
               label={stat.label}
               description={stat.description}
-              color={stat.color}
-              gradient={stat.gradient}
-              glow={stat.glow}
               index={index}
             />
           ))}
         </div>
 
-        {/* Additional features */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        {/* Ek özellikler */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
           {additionalStats.map((item, index) => {
             const IconComponent = item.icon
             return (
               <div
                 key={index}
-                className="group bg-black/10 backdrop-blur-xl border border-white/5 rounded-2xl p-6 hover:bg-black/20 hover:border-white/10 transition-all duration-300"
+                className="luxury-card p-6 bg-sand-beige/3 border border-silver-line/20 luxury-hover-shadow"
               >
                 <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-cosmic-500/20 to-mystical-500/20 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-                    <IconComponent className="w-6 h-6 text-cosmic-400" />
+                  <div className="w-12 h-12 bg-wine-purple/20 flex items-center justify-center luxury-shadow">
+                    <IconComponent className="w-6 h-6 text-wine-purple" />
                   </div>
                   <div>
-                    <h4 className="text-white font-semibold text-sm mb-1">{item.title}</h4>
-                    <p className="text-starlight-400 text-xs leading-relaxed">{item.description}</p>
+                    <h4 className="text-sand-beige font-semibold text-sm mb-1">{item.title}</h4>
+                    <p className="text-sand-beige/60 text-xs leading-relaxed">{item.description}</p>
                   </div>
                 </div>
               </div>

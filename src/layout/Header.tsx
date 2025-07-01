@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Star, Moon, Heart, Menu, X, Sparkles } from 'lucide-react'
+import { Star, Moon, Heart, Menu, X, TrendingUp } from 'lucide-react'
 
 const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -13,95 +13,82 @@ const Header: React.FC = () => {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-black/10 backdrop-blur-2xl border-b border-white/5 transition-all duration-300">
-      <div className="container mx-auto px-4 py-4">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-night-navy/95 backdrop-blur-xl">
+      <div className="container mx-auto px-4 py-6">
         <div className="flex items-center justify-between">
-          {/* Premium Logo */}
-          <div className="flex items-center space-x-3 group cursor-pointer" onClick={() => scrollToSection('home')}>
+          {/* Premium Logo - Lüks Tema */}
+          <div className="flex items-center space-x-4 group cursor-pointer" onClick={() => scrollToSection('home')}>
             <div className="relative">
-              <div className="w-12 h-12 bg-gradient-to-br from-cosmic-400 via-mystical-500 to-cosmic-600 rounded-2xl flex items-center justify-center shadow-2xl shadow-cosmic-400/20 group-hover:shadow-cosmic-400/40 transition-all duration-500 group-hover:scale-105">
-                <Star className="w-6 h-6 text-white group-hover:rotate-180 transition-transform duration-700" />
+              <div className="w-12 h-12 bg-gradient-to-br from-wine-purple to-wine-purple/80 flex items-center justify-center luxury-shadow-lg group-hover:luxury-hover-shadow transition-all duration-300">
+                <Star className="w-6 h-6 text-sand-beige" />
               </div>
-              <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full animate-pulse border-2 border-white shadow-lg"></div>
             </div>
             <div>
-              <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-cosmic-400 via-mystical-400 to-cosmic-500 bg-clip-text text-transparent group-hover:from-cosmic-300 group-hover:to-mystical-300 transition-all duration-300">
+              <h1 className="text-2xl md:text-3xl font-serif-classic font-bold text-sand-beige group-hover:text-sand-beige/90 transition-colors duration-300">
                 Astrobot
               </h1>
             </div>
           </div>
 
-          {/* Professional Desktop Navigation - Sağ kaydırılmış */}
-          <nav className="hidden md:flex items-center space-x-2">
+          {/* Desktop Navigation - Lüks Tema */}
+          <nav className="hidden md:flex items-center space-x-8">
             <button 
               onClick={() => scrollToSection('features')}
-              className="group relative px-6 py-3 text-starlight-200 hover:text-white transition-all duration-300 rounded-xl hover:bg-white/5 backdrop-blur-sm"
+              className="text-sand-beige/70 hover:text-sand-beige transition-all duration-300 font-medium text-lg luxury-hover-shadow px-4 py-2"
             >
-              <div className="flex items-center space-x-2">
-                <Sparkles className="w-4 h-4 group-hover:scale-125 group-hover:text-cosmic-400 transition-all duration-300" />
-                <span className="font-medium">Özellikler</span>
-              </div>
-              <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cosmic-400 to-mystical-400 group-hover:w-full transition-all duration-300"></div>
+              Özellikler
             </button>
             
             <button 
               onClick={() => scrollToSection('testimonials')}
-              className="group relative px-6 py-3 text-starlight-200 hover:text-white transition-all duration-300 rounded-xl hover:bg-white/5 backdrop-blur-sm"
+              className="text-sand-beige/70 hover:text-sand-beige transition-all duration-300 font-medium text-lg luxury-hover-shadow px-4 py-2"
             >
-              <div className="flex items-center space-x-2">
-                <Moon className="w-4 h-4 group-hover:animate-pulse group-hover:text-mystical-400 transition-all duration-300" />
-                <span className="font-medium">Yorumlar</span>
-              </div>
-              <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cosmic-400 to-mystical-400 group-hover:w-full transition-all duration-300"></div>
+              Yorumlar
             </button>
             
             <button 
               onClick={() => scrollToSection('stats')}
-              className="group relative px-6 py-3 text-starlight-200 hover:text-white transition-all duration-300 rounded-xl hover:bg-white/5 backdrop-blur-sm"
+              className="text-sand-beige/70 hover:text-sand-beige transition-all duration-300 font-medium text-lg luxury-hover-shadow px-4 py-2"
             >
-              <div className="flex items-center space-x-2">
-                <Heart className="w-4 h-4 group-hover:text-red-400 group-hover:scale-110 transition-all duration-300" />
-                <span className="font-medium">İstatistikler</span>
-              </div>
-              <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cosmic-400 to-mystical-400 group-hover:w-full transition-all duration-300"></div>
+              Analizler
             </button>
           </nav>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden relative p-3 text-starlight-200 hover:text-white transition-colors rounded-xl hover:bg-white/5 backdrop-blur-sm"
+            className="md:hidden relative p-3 text-sand-beige hover:text-sand-beige/80 transition-colors luxury-hover-shadow"
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
 
-        {/* Premium Mobile Menu */}
+        {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-6 pb-6 border-t border-white/10">
-            <nav className="flex flex-col space-y-2 pt-6">
+          <div className="md:hidden mt-6 pb-6">
+            <nav className="flex flex-col space-y-4 pt-6">
               <button 
                 onClick={() => scrollToSection('features')}
-                className="flex items-center space-x-3 p-4 text-starlight-200 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-300 group"
+                className="flex items-center space-x-3 p-4 text-sand-beige/70 hover:text-sand-beige hover:bg-wine-purple/10 transition-all duration-300 luxury-hover-shadow"
               >
-                <Sparkles className="w-5 h-5 group-hover:scale-125 group-hover:text-cosmic-400 transition-all duration-300" />
-                <span className="font-medium">Mistik Özellikler</span>
+                <Heart className="w-5 h-5" />
+                <span className="font-medium text-lg">Özellikler</span>
               </button>
               
               <button 
                 onClick={() => scrollToSection('testimonials')}
-                className="flex items-center space-x-3 p-4 text-starlight-200 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-300 group"
+                className="flex items-center space-x-3 p-4 text-sand-beige/70 hover:text-sand-beige hover:bg-wine-purple/10 transition-all duration-300 luxury-hover-shadow"
               >
-                <Moon className="w-5 h-5 group-hover:animate-pulse group-hover:text-mystical-400 transition-all duration-300" />
-                <span className="font-medium">Kullanıcı Yorumları</span>
+                <Moon className="w-5 h-5" />
+                <span className="font-medium text-lg">Yorumlar</span>
               </button>
               
               <button 
                 onClick={() => scrollToSection('stats')}
-                className="flex items-center space-x-3 p-4 text-starlight-200 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-300 group"
+                className="flex items-center space-x-3 p-4 text-sand-beige/70 hover:text-sand-beige hover:bg-wine-purple/10 transition-all duration-300 luxury-hover-shadow"
               >
-                <Heart className="w-5 h-5 group-hover:text-red-400 group-hover:scale-110 transition-all duration-300" />
-                <span className="font-medium">Güvenilirlik</span>
+                <TrendingUp className="w-5 h-5" />
+                <span className="font-medium text-lg">Analizler</span>
               </button>
             </nav>
           </div>
